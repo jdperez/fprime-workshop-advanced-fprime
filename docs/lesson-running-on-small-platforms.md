@@ -43,23 +43,29 @@ You should do the following:
 ## Hints
 
 * **Compilation troubleshooting**: Some components are platform-specific. `fprime-bootstrap` uses the Linux implementations by default. Attempting to compile Linux-specific code for Zephyr will result in errors, so those components will need to be switched to their Zephyr equivalents.
-* **Tailoring the Deployment**: The "stock" F´ deployment likely has too large of a memory footprint to run on a Raspberry Pi Pico 2. `TlmChan` and `CmdDispatcher` are two components known to have a large memory footprint. Identify whether they can be swapped OR configured to fit in your constraints. Some subtopologies may also not be required for a minimal working deployment.
+* **Consider Your Components**: `fprime-bootstrap` and `fprime-util new --deployment` ship with a fairly broad number of standard F Prime components. Which do you actually need to prove F Prime on the Pico 2?
 * **Tailoring the Project configuration**: The entire system can be further configured to optimize for your constraints, by updating the project configuration. Areas to look at include: subtopology configurations (`fprime/Svc/Subtopologies/`), project configuration (`fprime/default/config/`)
+* **Tailoring the Deployment**: The "stock" F´ deployment likely has too large of a memory footprint to run on a Raspberry Pi Pico 2. `TlmChan` and `CmdDispatcher` are two components known to have a large memory footprint. Identify whether they can be swapped OR configured to fit in your constraints. Some subtopologies may also not be required for a minimal working deployment.
+* **Cross Compile With Zephyr**: use the optional positional argument to `fprime-util` to cross compile with Zephyr
+```
+fprime-util generate zephyr
+fprime-util build zephyr
+```
+
 
 ---
 
 ## Relevant Resources and Documentation
 
-- **[F´ Cross-Compilation Guide](https://fprime.jpl.nasa.gov/latest/docs/tutorials/cross-compilation/)**
-- **[Zephyr RTOS Documentation](https://docs.zephyrproject.org/)**
 - **[F´ Zephyr Support Package](https://github.com/fprime-community/fprime-zephyr)**
 - **[F´ Docs: Configuring F Prime](https://fprime.jpl.nasa.gov/latest/docs/user-manual/framework/configuring-fprime/)**
 - **[F´ Docs: Working with (and configuring) Subtopologies](https://fprime.jpl.nasa.gov/devel/docs/user-manual/design-patterns/subtopologies/)**
+- **[Zephyr RTOS Documentation](https://docs.zephyrproject.org/)**
 
 ## Optional Goals
 
-* **Performance Profiling**: Measure and optimize memory usage
-* **Device Drivers**: Implement Zephyr-specific device drivers and/or device managers for Raspberry Pi Pico 2 peripherals
+* **Device Drivers**: Implement Zephyr-specific device drivers and/or device managers for Raspberry Pi Pico 2 peripherals. For example, try to blink an LED.
+* **Add More Subsystems:** Add some larger subsystems that you may have removed from the initial baseline.
 
 ## Reference Implementation
 
